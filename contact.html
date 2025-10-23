@@ -9,6 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background-color: #fdfdfd; }
+    a.email-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body class="bg-stone-50 text-stone-900 antialiased">
@@ -43,15 +44,21 @@
     <section class="space-y-10">
       <div>
         <h3 class="text-xl font-semibold text-stone-800 mb-2">For Representation Inquiries</h3>
-        <p class="text-stone-700">Please reach out to our agent directly at:</p>
-        <p class="text-indigo-700 font-medium mt-1">agent@keystonelit.com</p>
+        <p class="text-stone-700 mb-1">Please reach out to our agent directly at:</p>
+        <p class="text-indigo-700 font-medium">
+          <a href="mailto:agent@keystonelit.com" class="email-link">agent@keystonelit.com</a>
+        </p>
       </div>
 
       <div>
         <h3 class="text-xl font-semibold text-stone-800 mb-2">For Administrative or General Questions</h3>
-        <p class="text-stone-700">For questions about the agency, submissions, or other topics, please contact:</p>
-        <p class="text-indigo-700 font-medium mt-1">admin@keystonelit.com</p>
+        <p class="text-stone-700 mb-1">For questions about the agency, submissions, or other topics, please contact:</p>
+        <p class="text-indigo-700 font-medium">
+          <a href="mailto:admin@keystonelit.com" class="email-link">admin@keystonelit.com</a>
+        </p>
       </div>
+
+      <p class="text-stone-700 pt-4">We look forward to hearing from you!</p>
     </section>
   </main>
 
@@ -64,4 +71,3 @@
   </footer>
 </body>
 </html>
-
