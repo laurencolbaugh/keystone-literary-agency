@@ -19,7 +19,7 @@
       transition: max-height 0.4s ease;
     }
     #mobile-menu.open {
-      max-height: 1000px;
+      max-height: 1000px; /* large enough to show all menu items */
     }
   </style>
 </head>
@@ -93,7 +93,6 @@
 
     menuToggle.addEventListener('click', () => {
       mobileMenu.classList.toggle('open');
-      mobileMenu.classList.toggle('hidden');
       openIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
       document.body.classList.toggle('overflow-hidden');
