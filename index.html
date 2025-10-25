@@ -18,7 +18,7 @@
 <body class="bg-stone-50 text-stone-900 antialiased">
 
   <!-- Header (Sticky) -->
-  <header class="bg-white border-b border-stone-200 shadow-sm fixed top-0 w-full z-50">
+  <header id="header" class="bg-white border-b border-stone-200 shadow-sm fixed top-0 w-full z-50">
     <div class="w-full px-6 py-1 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-4">
         <img src="Logo.png" alt="Keystone Literary Agency logo" class="w-28 h-auto" />
@@ -51,7 +51,7 @@
   </header>
 
   <!-- Mobile Dropdown Menu (Below header) -->
-  <nav id="mobile-menu" class="hidden fixed top-16 left-0 w-full bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden z-50">
+  <nav id="mobile-menu" class="hidden fixed left-0 w-full bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden z-50">
     <a href="index.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition font-semibold">Home</a>
     <a href="about.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">About Us</a>
     <a href="submissions.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Submissions</a>
@@ -66,6 +66,19 @@
     const mobileMenu = document.getElementById('mobile-menu');
     const openIcon = document.getElementById('menu-open-icon');
     const closeIcon = document.getElementById('menu-close-icon');
+    const header = document.getElementById('header');
+
+    // Function to update top position of mobile menu based on header height
+    function updateMenuTop() {
+      const headerHeight = header.offsetHeight;
+      mobileMenu.style.top = headerHeight + 'px';
+    }
+
+    // Set initial top position
+    updateMenuTop();
+
+    // Update top on window resize
+    window.addEventListener('resize', updateMenuTop);
 
     menuToggle.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
