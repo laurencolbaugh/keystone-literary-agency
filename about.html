@@ -13,8 +13,8 @@
 
 <body class="bg-stone-50 text-stone-900 antialiased">
 
-  <!-- Header -->
-  <header class="bg-white border-b border-stone-200 shadow-sm">
+  <!-- Header (Sticky) -->
+  <header class="bg-white border-b border-stone-200 shadow-sm fixed top-0 w-full z-50">
     <div class="w-full px-6 py-1 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-4">
         <img src="Logo.png" alt="Keystone Literary Agency logo" class="w-28 h-auto" />
@@ -34,6 +34,9 @@
       </nav>
     </div>
   </header>
+
+  <!-- Spacer to prevent content from hiding behind fixed header -->
+  <div class="h-[78px]"></div> <!-- Adjust height to match your header -->
 
   <!-- Divider -->
   <div class="w-full h-2 bg-indigo-900"></div>
