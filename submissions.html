@@ -24,6 +24,7 @@
         </div>
       </a>
 
+      <!-- Desktop Navigation -->
       <nav class="hidden md:flex gap-5 text-[15px] font-medium mr-6">
         <a href="index.html" class="text-stone-700 hover:text-amber-600 transition">Home</a>
         <a href="about.html" class="text-stone-700 hover:text-amber-600 transition">About Us</a>
@@ -32,8 +33,42 @@
         <a href="rights.html" class="text-stone-700 hover:text-amber-600 transition">Rights</a>
         <a href="contact.html" class="text-stone-700 hover:text-amber-600 transition">Contact</a>
       </nav>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="menu-toggle" class="md:hidden text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-600 rounded p-2">
+        <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <nav id="mobile-menu" class="hidden flex-col bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden">
+      <a href="index.html" class="px-6 py-3 border-b border-stone-100 hover:text-amber-600 transition">Home</a>
+      <a href="about.html" class="px-6 py-3 border-b border-stone-100 hover:text-amber-600 transition">About Us</a>
+      <a href="submissions.html" class="px-6 py-3 border-b border-stone-100 hover:text-amber-600 transition font-semibold">Submissions</a>
+      <a href="news.html" class="px-6 py-3 border-b border-stone-100 hover:text-amber-600 transition">News</a>
+      <a href="rights.html" class="px-6 py-3 border-b border-stone-100 hover:text-amber-600 transition">Rights</a>
+      <a href="contact.html" class="px-6 py-3 hover:text-amber-600 transition">Contact</a>
+    </nav>
   </header>
+
+  <!-- Mobile Menu Script -->
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const openIcon = document.getElementById('menu-open-icon');
+    const closeIcon = document.getElementById('menu-close-icon');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      openIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+  </script>
 
   <!-- Divider -->
   <div class="w-full h-2 bg-indigo-900"></div>
@@ -62,12 +97,12 @@
   </main>
 
   <!-- Footer -->
- <footer class="bg-stone-100 border-t border-stone-200 mt-12">
-  <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center text-sm text-stone-600">
-    <p>© 2025 Keystone Literary Agency — All rights reserved.</p>
-    <div class="mt-3 md:mt-0">Designed with care • <a href="index.html" class="underline hover:text-amber-600">Home</a></div>
-  </div>
-</footer>
+  <footer class="bg-stone-100 border-t border-stone-200 mt-12">
+    <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center text-sm text-stone-600">
+      <p>© 2025 Keystone Literary Agency — All rights reserved.</p>
+      <div class="mt-3 md:mt-0">Designed with care • <a href="index.html" class="underline hover:text-amber-600">Home</a></div>
+    </div>
+  </footer>
+
 </body>
 </html>
-
