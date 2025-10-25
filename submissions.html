@@ -8,6 +8,19 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background-color: #fdfdfd; }
+    /* Hide tagline on mobile and medium screens */
+    @media (max-width: 1023px) {
+      .mobile-hide { display: none; }
+    }
+    /* Smooth dropdown animation */
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    #mobile-menu.open {
+      max-height: 1000px; /* large enough to show all menu items */
+    }
   </style>
 </head>
 
@@ -20,15 +33,15 @@
         <img src="Logo.png" alt="Keystone Literary Agency logo" class="w-28 h-auto" />
         <div class="leading-tight">
           <h1 class="text-2xl font-semibold tracking-tight text-stone-800">Keystone Literary Agency</h1>
-          <p class="text-base text-stone-500 mt-0.5">Connecting Great Books With the World</p>
+          <p class="text-base text-stone-500 mt-0.5 mobile-hide">Connecting Great Books With the World</p>
         </div>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex gap-5 text-[15px] font-medium mr-6">
+      <nav class="hidden md:flex gap-5 text-[15px] font-medium mr-6" id="desktop-menu">
         <a href="index.html" class="text-stone-700 hover:text-amber-600 transition">Home</a>
         <a href="about.html" class="text-stone-700 hover:text-amber-600 transition">About Us</a>
-        <a href="submissions.html" class="font-semibold text-amber-600">Submissions</a>
+        <a href="submissions.html" class="text-stone-700 hover:text-amber-600 transition">Submissions</a>
         <a href="news.html" class="text-stone-700 hover:text-amber-600 transition">News</a>
         <a href="rights.html" class="text-stone-700 hover:text-amber-600 transition">Rights</a>
         <a href="contact.html" class="text-stone-700 hover:text-amber-600 transition">Contact</a>
@@ -46,13 +59,13 @@
     </div>
 
     <!-- Mobile Dropdown Menu -->
-    <nav id="mobile-menu" class="hidden flex-col bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden">
-      <a href="index.html" class="px-6 py-3 border-b border-stone-100 hover:text-amber-600 transition">Home</a>
-      <a href="about.html" class="px-6 py-3 border-b border-stone-100 hover:text-amber-600 transition">About Us</a>
-      <a href="submissions.html" class="px-6 py-3 border-b border-stone-100 hover:text-amber-600 transition font-semibold">Submissions</a>
-      <a href="news.html" class="px-6 py-3 border-b border-stone-100 hover:text-amber-600 transition">News</a>
-      <a href="rights.html" class="px-6 py-3 border-b border-stone-100 hover:text-amber-600 transition">Rights</a>
-      <a href="contact.html" class="px-6 py-3 hover:text-amber-600 transition">Contact</a>
+    <nav id="mobile-menu" class="absolute left-0 top-full w-full bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden shadow-md z-40">
+      <a href="index.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Home</a>
+      <a href="about.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">About Us</a>
+      <a href="submissions.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Submissions</a>
+      <a href="news.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">News</a>
+      <a href="rights.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Rights</a>
+      <a href="contact.html" class="block px-6 py-4 hover:text-amber-600 transition">Contact</a>
     </nav>
   </header>
 
@@ -60,13 +73,32 @@
   <script>
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    const desktopMenu = document.getElementById('desktop-menu');
     const openIcon = document.getElementById('menu-open-icon');
     const closeIcon = document.getElementById('menu-close-icon');
+    const currentPage = window.location.pathname.split("/").pop();
 
+    // Highlight current page link on desktop and mobile
+    function highlightCurrent(menu) {
+      menu.querySelectorAll("a").forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+          link.classList.add("font-semibold", "text-amber-600");
+        } else {
+          link.classList.remove("font-semibold", "text-amber-600");
+        }
+      });
+    }
+
+    highlightCurrent(desktopMenu);
+    highlightCurrent(mobileMenu);
+
+    // Toggle mobile menu with smooth slide animation
     menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
       mobileMenu.classList.toggle('hidden');
       openIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
+      document.body.classList.toggle('overflow-hidden');
     });
   </script>
 
