@@ -49,7 +49,7 @@
       </button>
     </div>
 
-    <!-- Mobile Dropdown Menu (Below header, fixed to header height) -->
+    <!-- Mobile Dropdown Menu (Below header, consistent across pages) -->
 <nav id="mobile-menu" class="hidden absolute left-0 top-full w-full bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden shadow-md z-40">
   <a href="about.html" class="block px-6 py-4 border-b border-stone-100 font-semibold text-amber-600 hover:text-amber-600 transition">About Us</a>
   <a href="submissions.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Submissions</a>
@@ -58,22 +58,32 @@
   <a href="contact.html" class="block px-6 py-4 hover:text-amber-600 transition">Contact</a>
 </nav>
 
-  </header>
-
-  <!-- Mobile Menu Script -->
- <script>
+<!-- Mobile Menu Script -->
+<script>
   const menuToggle = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const openIcon = document.getElementById('menu-open-icon');
   const closeIcon = document.getElementById('menu-close-icon');
+  const currentPage = window.location.pathname.split("/").pop();
 
+  // Highlight current page link
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("font-semibold", "text-amber-600");
+    } else {
+      link.classList.remove("font-semibold", "text-amber-600");
+    }
+  });
+
+  // Toggle menu open/close
   menuToggle.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
     openIcon.classList.toggle('hidden');
     closeIcon.classList.toggle('hidden');
-    document.body.classList.toggle('overflow-hidden'); // prevent background scroll when open
+    document.body.classList.toggle('overflow-hidden'); // Prevent background scroll
   });
 </script>
+
 
 
   <!-- Divider -->
