@@ -12,6 +12,15 @@
     @media (max-width: 767px) {
       .mobile-hide { display: none; }
     }
+    /* Smooth dropdown animation */
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    #mobile-menu.open {
+      max-height: 1000px; /* large enough to show all menu items */
+    }
   </style>
 </head>
 
@@ -50,7 +59,7 @@
     </div>
 
     <!-- Mobile Dropdown Menu (Always shows all items, current page highlighted) -->
-    <nav id="mobile-menu" class="hidden absolute left-0 top-full w-full bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden shadow-md z-40">
+    <nav id="mobile-menu" class="absolute left-0 top-full w-full bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden shadow-md z-40">
       <a href="index.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Home</a>
       <a href="about.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">About Us</a>
       <a href="submissions.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Submissions</a>
@@ -83,12 +92,13 @@
     highlightCurrent(desktopMenu);
     highlightCurrent(mobileMenu);
 
-    // Toggle mobile menu
+    // Toggle mobile menu with smooth slide animation
     menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
       mobileMenu.classList.toggle('hidden');
       openIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
-      document.body.classList.toggle('overflow-hidden'); // Prevent background scroll
+      document.body.classList.toggle('overflow-hidden');
     });
   </script>
 
