@@ -8,8 +8,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background-color: #fdfdfd; }
-    /* Hide tagline on mobile */
-    @media (max-width: 767px) {
+    /* Hide tagline on mobile and medium screens */
+    @media (max-width: 1023px) {
       .mobile-hide { display: none; }
     }
     /* Smooth dropdown animation */
@@ -19,7 +19,7 @@
       transition: max-height 0.4s ease;
     }
     #mobile-menu.open {
-      max-height: 1000px; /* large enough to show all menu items */
+      max-height: 1000px;
     }
   </style>
 </head>
@@ -58,7 +58,7 @@
       </button>
     </div>
 
-    <!-- Mobile Dropdown Menu (Always shows all items, current page highlighted) -->
+    <!-- Mobile Dropdown Menu -->
     <nav id="mobile-menu" class="absolute left-0 top-full w-full bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden shadow-md z-40">
       <a href="index.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Home</a>
       <a href="about.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">About Us</a>
@@ -78,7 +78,6 @@
     const closeIcon = document.getElementById('menu-close-icon');
     const currentPage = window.location.pathname.split("/").pop();
 
-    // Highlight current page link on desktop and mobile
     function highlightCurrent(menu) {
       menu.querySelectorAll("a").forEach(link => {
         if (link.getAttribute("href") === currentPage) {
@@ -92,10 +91,8 @@
     highlightCurrent(desktopMenu);
     highlightCurrent(mobileMenu);
 
-    // Toggle mobile menu with smooth slide animation
     menuToggle.addEventListener('click', () => {
       mobileMenu.classList.toggle('open');
-      mobileMenu.classList.toggle('hidden');
       openIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
       document.body.classList.toggle('overflow-hidden');
@@ -135,10 +132,6 @@
 
         <p class="mb-4">
           She will consider any adult fiction with a clear, marketable, compelling hook, and strong voice. Her personal tastes align with the following wish list, but she would never shut herself off to The Next Big Thing!
-        </p>
-
-        <p class="mb-4">
-          Lindsay is also interested in working with proven genre writers (i.e. previously published, award-winning/nominated, placement in contests, strong platform, etc.) from the elevator pitch onward. Bring her your pitches and she will help direct you which one to pursue, or she can provide you with one to flesh out into a proposal.
         </p>
 
         <p class="font-semibold mb-2">She loves:</p>
