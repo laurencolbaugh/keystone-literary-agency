@@ -19,7 +19,7 @@
       transition: max-height 0.4s ease;
     }
     #mobile-menu.open {
-      max-height: 1000px; /* large enough to show all menu items */
+      max-height: 1000px;
     }
   </style>
 </head>
@@ -78,7 +78,6 @@
     const closeIcon = document.getElementById('menu-close-icon');
     const currentPage = window.location.pathname.split("/").pop();
 
-    // Highlight current page link on desktop and mobile
     function highlightCurrent(menu) {
       menu.querySelectorAll("a").forEach(link => {
         if (link.getAttribute("href") === currentPage) {
@@ -92,7 +91,6 @@
     highlightCurrent(desktopMenu);
     highlightCurrent(mobileMenu);
 
-    // Toggle mobile menu with smooth slide animation
     menuToggle.addEventListener('click', () => {
       mobileMenu.classList.toggle('open');
       mobileMenu.classList.toggle('hidden');
