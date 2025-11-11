@@ -11,6 +11,11 @@
     @media (max-width: 767px) {
       .mobile-hide { display: none; }
     }
+    .carousel-arrow-disabled {
+      opacity: 0.2;
+      cursor: default;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body class="bg-stone-50 text-stone-900 antialiased">
@@ -72,12 +77,12 @@
       Lindsay has had the privilege of representing a wide range of talented authors and acclaimed projects, including:
     </p>
 
-    <!-- Future Book Covers Carousel (tightened spacing, simple placeholders) -->
+    <!-- Future Book Covers Carousel -->
     <section class="pt-2 pb-10">
       <div class="relative">
-        <!-- Left Arrow -->
+        <!-- Left Arrow (visible on all screen sizes) -->
         <button id="carousel-prev"
-          class="hidden sm:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-stone-300 shadow-sm hover:bg-amber-50 hover:border-amber-500 transition"
+          class="flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-stone-300 shadow-sm hover:bg-amber-50 hover:border-amber-500 transition"
           aria-label="Scroll left">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -86,7 +91,7 @@
 
         <!-- Track -->
         <div id="carousel-track"
-          class="flex gap-6 overflow-x-hidden scroll-smooth px-2 sm:px-12 py-2">
+          class="flex gap-6 overflow-x-hidden scroll-smooth px-8 py-2">
           <!-- Placeholder cards (future book covers) -->
           <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
             <p class="text-sm font-medium text-stone-500">coming soon</p>
@@ -108,9 +113,9 @@
           </div>
         </div>
 
-        <!-- Right Arrow -->
+        <!-- Right Arrow (visible on all screen sizes) -->
         <button id="carousel-next"
-          class="hidden sm:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-stone-300 shadow-sm hover:bg-amber-50 hover:border-amber-500 transition"
+          class="flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-stone-300 shadow-sm hover:bg-amber-50 hover:border-amber-500 transition"
           aria-label="Scroll right">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -159,13 +164,27 @@
         }
       });
 
-      // Carousel controls
+      // Carousel controls with fade at ends
       const track = document.getElementById('carousel-track');
       const prevBtn = document.getElementById('carousel-prev');
       const nextBtn = document.getElementById('carousel-next');
 
       if (track && prevBtn && nextBtn) {
         const scrollAmount = 260; // pixels per click
+
+        function updateArrows() {
+          const maxScrollLeft = track.scrollWidth - track.clientWidth - 1; // tolerance
+          if (track.scrollLeft <= 0) {
+            prevBtn.classList.add('carousel-arrow-disabled');
+          } else {
+            prevBtn.classList.remove('carousel-arrow-disabled');
+          }
+          if (track.scrollLeft >= maxScrollLeft) {
+            nextBtn.classList.add('carousel-arrow-disabled');
+          } else {
+            nextBtn.classList.remove('carousel-arrow-disabled');
+          }
+        }
 
         prevBtn.addEventListener('click', () => {
           track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
@@ -174,6 +193,11 @@
         nextBtn.addEventListener('click', () => {
           track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         });
+
+        track.addEventListener('scroll', updateArrows);
+
+        // Initialize state
+        updateArrows();
       }
     });
   </script>
