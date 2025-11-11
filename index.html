@@ -80,7 +80,7 @@
     <!-- Future Book Covers Carousel -->
     <section class="pt-2 pb-10">
       <div class="relative">
-        <!-- Left Arrow (visible on all screen sizes) -->
+        <!-- Left Arrow -->
         <button id="carousel-prev"
           class="flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-stone-300 shadow-sm hover:bg-amber-50 hover:border-amber-500 transition"
           aria-label="Scroll left">
@@ -91,29 +91,29 @@
 
         <!-- Track -->
         <div id="carousel-track"
-          class="flex gap-6 overflow-x-hidden scroll-smooth px-8 py-2">
+          class="flex gap-6 overflow-x-hidden scroll-smooth px-12 py-2">
           <!-- Placeholder cards (future book covers) -->
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+          <div class="carousel-item min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
             <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+          <div class="carousel-item min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
             <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+          <div class="carousel-item min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
             <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+          <div class="carousel-item min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
             <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+          <div class="carousel-item min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
             <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+          <div class="carousel-item min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
             <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
         </div>
 
-        <!-- Right Arrow (visible on all screen sizes) -->
+        <!-- Right Arrow -->
         <button id="carousel-next"
           class="flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-stone-300 shadow-sm hover:bg-amber-50 hover:border-amber-500 transition"
           aria-label="Scroll right">
@@ -164,40 +164,93 @@
         }
       });
 
-      // Carousel controls with fade at ends
+      // Carousel logic: center one card between arrows; fade arrows at ends
       const track = document.getElementById('carousel-track');
       const prevBtn = document.getElementById('carousel-prev');
       const nextBtn = document.getElementById('carousel-next');
+      const items = Array.from(track.querySelectorAll('.carousel-item'));
 
-      if (track && prevBtn && nextBtn) {
-        const scrollAmount = 260; // pixels per click
+      if (track && prevBtn && nextBtn && items.length) {
+        let currentIndex = 0;
+        let scrollTimeout = null;
 
         function updateArrows() {
-          const maxScrollLeft = track.scrollWidth - track.clientWidth - 1; // tolerance
-          if (track.scrollLeft <= 0) {
+          if (currentIndex === 0) {
             prevBtn.classList.add('carousel-arrow-disabled');
           } else {
             prevBtn.classList.remove('carousel-arrow-disabled');
           }
-          if (track.scrollLeft >= maxScrollLeft) {
+
+          if (currentIndex === items.length - 1) {
             nextBtn.classList.add('carousel-arrow-disabled');
           } else {
             nextBtn.classList.remove('carousel-arrow-disabled');
           }
         }
 
+        function scrollToIndex(index, smooth = true) {
+          if (!items[index]) return;
+          currentIndex = Math.max(0, Math.min(index, items.length - 1));
+
+          const activeItem = items[currentIndex];
+          const trackRect = track.getBoundingClientRect();
+          const itemRect = activeItem.getBoundingClientRect();
+
+          const trackCenter = trackRect.left + trackRect.width / 2;
+          const itemCenter = itemRect.left + itemRect.width / 2;
+          const offset = itemCenter - trackCenter;
+
+          track.scrollBy({
+            left: offset,
+            behavior: smooth ? 'smooth' : 'auto'
+          });
+
+          updateArrows();
+        }
+
         prevBtn.addEventListener('click', () => {
-          track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+          if (currentIndex > 0) {
+            scrollToIndex(currentIndex - 1);
+          }
         });
 
         nextBtn.addEventListener('click', () => {
-          track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+          if (currentIndex < items.length - 1) {
+            scrollToIndex(currentIndex + 1);
+          }
         });
 
-        track.addEventListener('scroll', updateArrows);
+        // Snap on manual scroll (e.g., swipe on mobile)
+        track.addEventListener('scroll', () => {
+          if (scrollTimeout) clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            const trackRect = track.getBoundingClientRect();
+            const trackCenter = trackRect.left + trackRect.width / 2;
 
-        // Initialize state
-        updateArrows();
+            let closestIndex = 0;
+            let minDistance = Infinity;
+
+            items.forEach((item, i) => {
+              const rect = item.getBoundingClientRect();
+              const itemCenter = rect.left + rect.width / 2;
+              const distance = Math.abs(itemCenter - trackCenter);
+              if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = i;
+              }
+            });
+
+            scrollToIndex(closestIndex);
+          }, 120);
+        });
+
+        // Re-center on resize to keep aligned
+        window.addEventListener('resize', () => {
+          scrollToIndex(currentIndex, false);
+        });
+
+        // Initialize
+        scrollToIndex(0, false);
       }
     });
   </script>
