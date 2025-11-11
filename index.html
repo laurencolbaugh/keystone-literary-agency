@@ -68,17 +68,12 @@
     <p class="max-w-3xl text-stone-700 mb-6">
        With 20 years of industry experience, as both an editor and an agent, Lindsay Guzzardo brings a hands-on, career-focused approach to representation. In November 2025, she founded Keystone Literary Agency in the Keystone State. The word “keystone” is also a nod to the role an agent serves, fortifying the bridge between author and publisher, leading to our motto: “Keystone Literary Agency: Connecting Great Books with the World.”
     </p>
-    <p class="text-stone-700 mb-12">
+    <p class="text-stone-700 mb-4">
       Lindsay has had the privilege of representing a wide range of talented authors and acclaimed projects, including:
     </p>
 
-    <!-- Future Book Covers Carousel -->
-    <section class="py-10">
-      <h3 class="text-2xl font-semibold text-stone-800 mb-4">Featured Projects (Coming Soon)</h3>
-      <p class="text-sm text-stone-500 mb-4">
-        A rotating selection of standout titles from Keystone authors will appear here.
-      </p>
-
+    <!-- Future Book Covers Carousel (tightened spacing, simple placeholders) -->
+    <section class="pt-2 pb-10">
       <div class="relative">
         <!-- Left Arrow -->
         <button id="carousel-prev"
@@ -91,38 +86,25 @@
 
         <!-- Track -->
         <div id="carousel-track"
-          class="flex gap-6 overflow-x-hidden scroll-smooth px-2 sm:px-12 py-4">
+          class="flex gap-6 overflow-x-hidden scroll-smooth px-2 sm:px-12 py-2">
           <!-- Placeholder cards (future book covers) -->
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex flex-col items-center justify-center text-stone-500">
-            <div class="w-20 h-28 border border-dashed border-stone-300 mb-3"></div>
-            <p class="text-xs uppercase tracking-wide text-stone-400">Coming Soon</p>
-            <p class="text-sm font-medium mt-1">Keystone Title 1</p>
+          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+            <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex flex-col items-center justify-center text-stone-500">
-            <div class="w-20 h-28 border border-dashed border-stone-300 mb-3"></div>
-            <p class="text-xs uppercase tracking-wide text-stone-400">Coming Soon</p>
-            <p class="text-sm font-medium mt-1">Keystone Title 2</p>
+          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+            <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex flex-col items-center justify-center text-stone-500">
-            <div class="w-20 h-28 border border-dashed border-stone-300 mb-3"></div>
-            <p class="text-xs uppercase tracking-wide text-stone-400">Coming Soon</p>
-            <p class="text-sm font-medium mt-1">Keystone Title 3</p>
+          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+            <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex flex-col items-center justify-center text-stone-500">
-            <div class="w-20 h-28 border border-dashed border-stone-300 mb-3"></div>
-            <p class="text-xs uppercase tracking-wide text-stone-400">Coming Soon</p>
-            <p class="text-sm font-medium mt-1">Keystone Title 4</p>
+          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+            <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex flex-col items-center justify-center text-stone-500">
-            <div class="w-20 h-28 border border-dashed border-stone-300 mb-3"></div>
-            <p class="text-xs uppercase tracking-wide text-stone-400">Coming Soon</p>
-            <p class="text-sm font-medium mt-1">Keystone Title 5</p>
+          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+            <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
-          <!-- Extra placeholders if you’d like a longer scroll -->
-          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex flex-col items-center justify-center text-stone-500">
-            <div class="w-20 h-28 border border-dashed border-stone-300 mb-3"></div>
-            <p class="text-xs uppercase tracking-wide text-stone-400">Coming Soon</p>
-            <p class="text-sm font-medium mt-1">Keystone Title 6</p>
+          <div class="min-w-[150px] sm:min-w-[180px] h-56 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center">
+            <p class="text-sm font-medium text-stone-500">coming soon</p>
           </div>
         </div>
 
@@ -183,7 +165,7 @@
       const nextBtn = document.getElementById('carousel-next');
 
       if (track && prevBtn && nextBtn) {
-        const scrollAmount = 260; // pixels per click, tweak if needed
+        const scrollAmount = 260; // pixels per click
 
         prevBtn.addEventListener('click', () => {
           track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
