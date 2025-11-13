@@ -292,7 +292,7 @@
         }
       });
 
-      // Carousel logic: center one card between arrows; fade arrows at ends
+      // Carousel logic: center items in the middle, but fully show first and last cards
       const track = document.getElementById('carousel-track');
       const prevBtn = document.getElementById('carousel-prev');
       const nextBtn = document.getElementById('carousel-next');
@@ -320,18 +320,36 @@
           if (!items[index]) return;
           currentIndex = Math.max(0, Math.min(index, items.length - 1));
 
-          const activeItem = items[currentIndex];
-          const trackRect = track.getBoundingClientRect();
-          const itemRect = activeItem.getBoundingClientRect();
+          const maxScrollLeft = track.scrollWidth - track.clientWidth;
+          const behavior = smooth ? 'smooth' : 'auto';
 
-          const trackCenter = trackRect.left + trackRect.width / 2;
-          const itemCenter = itemRect.left + itemRect.width / 2;
-          const offset = itemCenter - trackCenter;
+          if (currentIndex === 0) {
+            // Show first card fully at the left
+            track.scrollTo({
+              left: 0,
+              behavior
+            });
+          } else if (currentIndex === items.length - 1) {
+            // Show last card fully at the right
+            track.scrollTo({
+              left: maxScrollLeft,
+              behavior
+            });
+          } else {
+            // Center other cards
+            const activeItem = items[currentIndex];
+            const trackRect = track.getBoundingClientRect();
+            const itemRect = activeItem.getBoundingClientRect();
 
-          track.scrollBy({
-            left: offset,
-            behavior: smooth ? 'smooth' : 'auto'
-          });
+            const trackCenter = trackRect.left + trackRect.width / 2;
+            const itemCenter = itemRect.left + itemRect.width / 2;
+            const offset = itemCenter - trackCenter;
+
+            track.scrollBy({
+              left: offset,
+              behavior
+            });
+          }
 
           updateArrows();
         }
@@ -348,10 +366,23 @@
           }
         });
 
-        // Snap on manual scroll (e.g., swipe on mobile)
+        // Snap on manual scroll (e.g., swipe on mobile), but respect edges
         track.addEventListener('scroll', () => {
           if (scrollTimeout) clearTimeout(scrollTimeout);
           scrollTimeout = setTimeout(() => {
+            const maxScrollLeft = track.scrollWidth - track.clientWidth;
+            const currentScrollLeft = track.scrollLeft;
+
+            // If we're very close to either edge, lock to first/last card
+            if (currentScrollLeft <= 10) {
+              scrollToIndex(0);
+              return;
+            }
+            if (maxScrollLeft - currentScrollLeft <= 10) {
+              scrollToIndex(items.length - 1);
+              return;
+            }
+
             const trackRect = track.getBoundingClientRect();
             const trackCenter = trackRect.left + trackRect.width / 2;
 
@@ -372,7 +403,7 @@
           }, 120);
         });
 
-        // Re-center on resize to keep aligned
+        // Re-center / re-align on resize to keep alignment consistent
         window.addEventListener('resize', () => {
           scrollToIndex(currentIndex, false);
         });
