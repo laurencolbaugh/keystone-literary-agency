@@ -319,6 +319,8 @@
       if (track && prevBtn && nextBtn && items.length) {
         let currentIndex = 0;
         let scrollTimeout = null;
+        let isProgrammaticScroll = false;
+
 
         const isDesktop = () => window.innerWidth >= 768;
 
@@ -337,42 +339,43 @@
         }
 
         function scrollToIndex(index, smooth = true) {
-          if (!items[index]) return;
-          currentIndex = Math.max(0, Math.min(index, items.length - 1));
+  if (!items[index]) return;
+  currentIndex = Math.max(0, Math.min(index, items.length - 1));
 
-          const maxScrollLeft = track.scrollWidth - track.clientWidth;
-          const behavior = smooth ? 'smooth' : 'auto';
+  const behavior = smooth ? 'smooth' : 'auto';
 
-          if (currentIndex === 0) {
-            // Show first card fully at the left
-            track.scrollTo({
-              left: 0,
-              behavior
-            });
-          } else if (currentIndex === items.length - 1) {
-            // Show last card fully at the right
-            track.scrollTo({
-              left: maxScrollLeft,
-              behavior
-            });
-          } else {
-            // Center other cards (desktop only)
-            const activeItem = items[currentIndex];
-            const trackRect = track.getBoundingClientRect();
-            const itemRect = activeItem.getBoundingClientRect();
+  const maxScrollLeft = track.scrollWidth - track.clientWidth;
+  const activeItem = items[currentIndex];
 
-            const trackCenter = trackRect.left + trackRect.width / 2;
-            const itemCenter = itemRect.left + itemRect.width / 2;
-            const offset = itemCenter - trackCenter;
+  // Compute a stable, absolute target scrollLeft
+  let targetLeft;
 
-            track.scrollBy({
-              left: offset,
-              behavior
-            });
-          }
+  if (currentIndex === 0) {
+    targetLeft = 0;
+  } else if (currentIndex === items.length - 1) {
+    targetLeft = maxScrollLeft;
+  } else {
+    const itemLeft = activeItem.offsetLeft;
+    const itemWidth = activeItem.offsetWidth;
+    const trackWidth = track.clientWidth;
 
-          updateArrows();
-        }
+    targetLeft = itemLeft - (trackWidth - itemWidth) / 2;
+    targetLeft = Math.max(0, Math.min(targetLeft, maxScrollLeft));
+  }
+
+  isProgrammaticScroll = true;
+
+  track.scrollTo({ left: targetLeft, behavior });
+
+  // Release the guard shortly after the smooth scroll should settle
+  if (scrollTimeout) clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(() => {
+    isProgrammaticScroll = false;
+  }, smooth ? 400 : 0);
+
+  updateArrows();
+}
+
 
         prevBtn.addEventListener('click', () => {
           if (currentIndex > 0) {
@@ -387,43 +390,44 @@
         });
 
         // Snap on manual scroll (e.g., swipe or scroll) — desktop only
-        track.addEventListener('scroll', () => {
-          if (!isDesktop()) return;  // Do not auto-snap on mobile
+       track.addEventListener('scroll', () => {
+  if (!isDesktop()) return;          // Do not auto-snap on mobile
+  if (isProgrammaticScroll) return;  // Ignore arrow-initiated scroll
 
-          if (scrollTimeout) clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            const maxScrollLeft = track.scrollWidth - track.clientWidth;
-            const currentScrollLeft = track.scrollLeft;
+  if (scrollTimeout) clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(() => {
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    const currentScrollLeft = track.scrollLeft;
 
-            // If we're very close to either edge, lock to first/last card
-            if (currentScrollLeft <= 10) {
-              scrollToIndex(0);
-              return;
-            }
-            if (maxScrollLeft - currentScrollLeft <= 10) {
-              scrollToIndex(items.length - 1);
-              return;
-            }
+    if (currentScrollLeft <= 10) {
+      scrollToIndex(0);
+      return;
+    }
+    if (maxScrollLeft - currentScrollLeft <= 10) {
+      scrollToIndex(items.length - 1);
+      return;
+    }
 
-            const trackRect = track.getBoundingClientRect();
-            const trackCenter = trackRect.left + trackRect.width / 2;
+    const trackRect = track.getBoundingClientRect();
+    const trackCenter = trackRect.left + trackRect.width / 2;
 
-            let closestIndex = 0;
-            let minDistance = Infinity;
+    let closestIndex = 0;
+    let minDistance = Infinity;
 
-            items.forEach((item, i) => {
-              const rect = item.getBoundingClientRect();
-              const itemCenter = rect.left + rect.width / 2;
-              const distance = Math.abs(itemCenter - trackCenter);
-              if (distance < minDistance) {
-                minDistance = distance;
-                closestIndex = i;
-              }
-            });
+    items.forEach((item, i) => {
+      const rect = item.getBoundingClientRect();
+      const itemCenter = rect.left + rect.width / 2;
+      const distance = Math.abs(itemCenter - trackCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    });
 
-            scrollToIndex(closestIndex);
-          }, 120);
-        });
+    scrollToIndex(closestIndex);
+  }, 120);
+});
+
 
         // Re-align on resize — only snap when on desktop
         window.addEventListener('resize', () => {
@@ -444,4 +448,5 @@
 
 </body>
 </html>
+
 
