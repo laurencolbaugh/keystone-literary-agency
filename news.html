@@ -12,20 +12,26 @@
       background-color: #fdfdfd;
       overflow-x: hidden;
     }
+
     @media (max-width: 767px) {
-      .mobile-hide { display: none; }
+      .mobile-hide {
+        display: none;
+      }
     }
   </style>
 </head>
 
 <body class="bg-stone-50 text-stone-900 antialiased">
 
+  <!-- Header -->
   <header id="header" class="bg-white border-b border-stone-200 shadow-sm fixed top-0 w-full z-50">
-   <div class="w-full px-6 py-4 flex items-center justify-between h-36 relative">
+    <div class="w-full px-6 py-4 flex items-center justify-between h-36 relative">
+
       <div class="hidden md:block flex-1"></div>
 
       <a href="index.html" class="flex-1 flex justify-center items-center">
-        <img src="Logo.png" alt="Keystone Literary Agency logo"
+        <img src="Logo.png"
+             alt="Keystone Literary Agency logo"
              class="max-h-32 w-auto object-contain" />
       </a>
 
@@ -40,133 +46,213 @@
 
       <button
         id="menu-toggle"
-        class="md:hidden text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-600 rounded p-2
-               absolute right-4 top-1/2 -translate-y-1/2">
-        <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        class="md:hidden text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-600 rounded p-2 absolute right-4 top-1/2 -translate-y-1/2">
+
+        <svg id="menu-open-icon"
+             xmlns="http://www.w3.org/2000/svg"
+             class="h-7 w-7"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+          <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
         </svg>
-        <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+
+        <svg id="menu-close-icon"
+             xmlns="http://www.w3.org/2000/svg"
+             class="h-7 w-7 hidden"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+          <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
+
     </div>
   </header>
 
-  <nav id="mobile-menu" class="hidden fixed left-0 w-full bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden z-50">
+  <!-- Mobile Menu -->
+  <nav id="mobile-menu"
+       class="hidden fixed left-0 w-full bg-white border-t border-stone-200 text-[15px] font-medium text-stone-700 md:hidden z-50">
+
     <a href="index.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Home</a>
     <a href="about.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">About Us</a>
     <a href="submissions.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Submissions</a>
     <a href="news.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">News</a>
     <a href="rights.html" class="block px-6 py-4 border-b border-stone-100 hover:text-amber-600 transition">Rights</a>
     <a href="contact.html" class="block px-6 py-4 hover:text-amber-600 transition">Contact</a>
+
   </nav>
 
+  <!-- Blue Divider -->
   <div class="w-full h-2 bg-indigo-900"></div>
 
+  <!-- Main -->
   <main class="pt-52 py-20 px-6 text-left">
+
     <div class="max-w-4xl mx-auto">
+
       <h2 class="text-4xl font-extrabold leading-tight text-indigo-700 mb-6 text-center md:text-left">
         Agency News
       </h2>
 
       <section class="space-y-14">
 
-        <!-- NAMRATHA STANLEY ANNOUNCEMENT -->
+        <!-- NAMRATHA STANLEY -->
         <div class="flex flex-col md:flex-row items-start gap-6">
-          <a href="https://variety.com/2026/film/markets-festivals/hollywood-ventures-group-vineyard-melody-cannes-option-1236755712/" target="_blank" rel="noopener noreferrer"
+
+          <a href="https://variety.com/2026/film/markets-festivals/hollywood-ventures-group-vineyard-melody-cannes-option-1236755712/"
+             target="_blank"
+             rel="noopener noreferrer"
              class="w-48 h-48 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center overflow-hidden mx-auto md:mx-0">
+
             <img src="Vineyard Melody Variety.jpg"
                  alt="Variety article about Vineyard Melody by Namratha Stanley"
-                 class="w-full h-full object-cover">
+                 class="w-full h-full object-contain p-2">
+
           </a>
 
           <div class="flex-1">
+
             <h3 class="text-xl font-semibold text-stone-900 mb-2">
               Congrats to Keystone author Namratha Stanley!
             </h3>
+
             <p class="text-stone-700 text-justify">
-              Her memoir <em>VINEYARD MELODY</em> is currently in development with Hollywood Ventures Group.
+              Her memoir VINEYARD MELODY is currently in development with Hollywood Ventures Group.
             </p>
+
           </div>
+
         </div>
 
-        <!-- TYLER ZED ANNOUNCEMENT -->
+        <!-- TYLER ZED -->
         <div class="flex flex-col md:flex-row items-start gap-6">
-          <a href="Desmond Announcement_2026.jpg" target="_blank" rel="noopener noreferrer"
+
+          <a href="Desmond Announcement_2026.jpg"
+             target="_blank"
+             rel="noopener noreferrer"
              class="w-48 h-48 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center overflow-hidden mx-auto md:mx-0">
+
             <img src="Desmond Announcement_2026.jpg"
                  alt="Publishers Marketplace deal report for The Final Upload by Tyler Zed"
-                 class="w-full h-full object-cover">
+                 class="w-full h-full object-contain p-2">
+
           </a>
 
           <div class="flex-1">
+
             <h3 class="text-xl font-semibold text-stone-900 mb-2">
               Congrats to Keystone author Tyler Zed
             </h3>
+
             <p class="text-stone-700 text-justify">
-              Publishers Marketplace announced Tyler Zed’s thriller <em>THE FINAL UPLOAD</em>, forthcoming from Blackstone Publishing.
+              Publishers Marketplace announced Tyler Zed’s thriller THE FINAL UPLOAD, forthcoming from Blackstone Publishing.
             </p>
+
           </div>
+
         </div>
 
-        <!-- SUSAN SCHULMAN ANNOUNCEMENT -->
+        <!-- SUSAN SCHULMAN -->
         <div class="flex flex-col md:flex-row items-start gap-6">
-          <a href="https://www.schulmanagency.com/" target="_blank" rel="noopener noreferrer"
+
+          <a href="https://www.schulmanagency.com/"
+             target="_blank"
+             rel="noopener noreferrer"
              class="w-48 h-48 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center overflow-hidden mx-auto md:mx-0">
+
             <img src="SusansLogo.jpg"
                  alt="Susan Schulman Literary Agency logo"
                  class="w-full h-full object-contain p-4">
+
           </a>
 
           <div class="flex-1">
+
             <h3 class="text-xl font-semibold text-stone-900 mb-2">
               Keystone Literary Agency Partners with the Susan Schulman Literary Agency for Derivative Rights
             </h3>
+
             <p class="text-stone-700 mb-3 text-justify">
               Keystone Literary Agency is pleased to announce a new partnership with the
-              <a href="https://www.schulmanagency.com/" target="_blank" rel="noopener noreferrer" class="inline-block underline text-amber-600 hover:text-amber-600">
+              <a href="https://www.schulmanagency.com/"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="inline-block underline text-amber-600 hover:text-amber-600">
                 Susan Schulman Literary Agency
               </a>
               for the representation of derivative rights, including foreign/translation, audio, and film/TV.
             </p>
+
             <p class="text-stone-700 text-justify">
               Susan Schulman Literary Agency brings decades of experience in global rights and screen adaptation,
               and has represented numerous high-profile projects, including the book-to-TV adaptation of
               <em>The Queen’s Gambit</em>.
             </p>
+
           </div>
+
         </div>
 
-        <!-- MICHAEL NAYAK ANNOUNCEMENT -->
+        <!-- MICHAEL NAYAK -->
         <div class="flex flex-col md:flex-row items-start gap-6">
-          <a href="https://www.libraryjournal.com/story/Stellar-Selections-Best-Books-2025" target="_blank" rel="noopener noreferrer"
+
+          <a href="https://www.libraryjournal.com/story/Stellar-Selections-Best-Books-2025"
+             target="_blank"
+             rel="noopener noreferrer"
              class="w-48 h-48 border border-stone-200 rounded-lg bg-white shadow-sm flex items-center justify-center overflow-hidden mx-auto md:mx-0">
+
             <img src="https://www.libraryjournal.com/binaries/content/gallery/Jlibrary/2025/december/best-books-2025/ljdec2025bestbooks_starsfeatured.jpg/ljdec2025bestbooks_starsfeatured.jpg/Jlibrary%3Athreehundred"
                  alt="Library Journal — Stellar Selections | Best Books 2025"
                  class="w-full h-full object-cover">
+
           </a>
+
           <div class="flex-1">
+
             <h3 class="text-xl font-semibold text-stone-900 mb-2">
               Congrats to Keystone author Michael Nayak
             </h3>
+
             <p class="text-stone-700 text-justify">
               Library Journal has named his sci-fi thriller SYMBIOTE a Best Book of 2025!
             </p>
+
           </div>
+
         </div>
 
       </section>
+
     </div>
+
   </main>
 
+  <!-- Footer -->
   <footer class="bg-stone-100 border-t border-stone-200 mt-12">
+
     <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center text-sm text-stone-600">
+
       <p>© 2025 Keystone Literary Agency — All rights reserved.</p>
-      <div class="mt-3 md:mt-0">Designed with care • <a href="index.html" class="underline hover:text-amber-600">Home</a></div>
+
+      <div class="mt-3 md:mt-0">
+        Designed with care •
+        <a href="index.html" class="underline hover:text-amber-600">Home</a>
+      </div>
+
     </div>
+
   </footer>
 
+  <!-- Scripts -->
   <script>
+
     const header = document.getElementById('header');
     const mobileMenu = document.getElementById('mobile-menu');
 
@@ -189,6 +275,7 @@
     });
 
     document.addEventListener('DOMContentLoaded', () => {
+
       const currentPath = window.location.pathname.split('/').pop() || 'news.html';
 
       document.querySelectorAll('header nav.md\\:flex a').forEach(link => {
@@ -204,7 +291,9 @@
       });
 
       updateMobileMenuPosition();
+
     });
+
   </script>
 
 </body>
